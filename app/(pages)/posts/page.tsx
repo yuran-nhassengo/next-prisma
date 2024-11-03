@@ -1,3 +1,4 @@
+import { createPost } from "@/app/actions/actions";
 import prisma from "@/app/lib/db"
 import Link from "next/link";
 
@@ -11,7 +12,7 @@ export default async function PostsPage() {
         orderBy: {
             updatedAt:"desc",
         },
-        take:2,
+        take:10,
     });
 
     const postsCount = await prisma.post.count();
@@ -32,7 +33,7 @@ export default async function PostsPage() {
                 }
             </ul>
 
-            <form className="flex flex-col  gap-y-2 w-[300px]">
+            <form action={createPost}  className="flex flex-col  gap-y-2 w-[300px]">
                 <input
                     type="text"
                     name="title"
